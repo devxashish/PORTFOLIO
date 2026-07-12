@@ -1,279 +1,221 @@
-```markdown
-<p align="center">
-  <img src="https://img.shields.io/badge/PORTFOLIO-DevAashish-blue?logo=github" alt="project" />
-  &nbsp;
-  <img src="https://img.shields.io/github/stars/devxashish/PORTFOLIO?style=social" alt="stars" />
-  &nbsp;
-  <img src="https://img.shields.io/badge/React-19-blue?logo=react" alt="react" />
-  &nbsp;
-  <img src="https://img.shields.io/badge/TailwindCSS-3.3-cyan?logo=tailwindcss" alt="tailwind" />
-  &nbsp;
-  <img src="https://img.shields.io/badge/Framer_Motion-✓-pink?logo=framer" alt="framer-motion" />
-  &nbsp;
-  <img src="https://img.shields.io/badge/Firebase-✓-orange?logo=firebase" alt="firebase" />
-</p>
+# 🚀 PORTFOLIO — Ashish
 
-# PORTFOLIO
-A modern, animated React portfolio — minimal, fast, and focused.
+A polished, accessible single-page portfolio website built with modern web tooling — React + Tailwind CSS, enhanced with motion, icons and optional Firebase integration. This repository contains the source for a responsive portfolio site with pages for Home, Skills, Projects, Profile (Resume) and Contact.
 
 ---
 
-## About
-- What this project is  
-  A single-page portfolio application implemented with React (Create React App), styled with Tailwind CSS and enhanced with Framer Motion animations.
-
-- What problem it solves  
-  Presents a compact, responsive developer portfolio to showcase skills, projects, and contact information in a polished, animated UI.
-
-- Who it's built for  
-  Developers and engineers who want a lightweight, maintainable portfolio template that demonstrates modern UI motion, responsive layout, and easy content updates.
+## Why this project exists
+This project showcases professional web UI, animation, and component-driven design for a personal portfolio. It presents projects, skills, and contact details in a fast, responsive SPA so recruiters, clients, and contributors can evaluate work and reach out quickly.
 
 ---
 
-## Project Highlights
-- Clean SPA using React Router for page navigation.
-- Lightweight styling with Tailwind CSS for rapid UI composition.
-- Smooth, production-ready animations powered by Framer Motion.
-- Component-driven structure for easy maintenance and extension.
-- Projects section supports filtering (All / Major / Mini) and optional project credentials display.
+## Key highlights
+- Clean, component-based SPA using React (Create React App)
+- Tailwind CSS for utility-first styling and responsive layouts
+- Framer Motion for smooth page transitions and micro-interactions
+- Firebase dependency present — used for backend needs (contact, hosting, etc.) where configured
+- Resume PDF available in `public/` (verify content)
+- Intentionally minimal build configuration for easy deployment (Netlify / Vercel / GitHub Pages)
 
 ---
 
-## Features
+## Features at a glance
 
-| Feature | Status | Notes |
-|---------|:------:|-------|
-| Single-page routing (React Router) | ✅ | Routes: /, /about, /skills, /projects, /profile, /contact |
-| Animated UI (Framer Motion) | ✅ | Entrance & hover transitions across pages and components |
-| Responsive layout (Tailwind CSS) | ✅ | Grid & utility classes used throughout |
-| Skills listing with icons | ✅ | Static list in src/js/Skills.js using react-icons |
-| Projects list with filters | ✅ | Static projects array in src/js/Projects.js; supports "All", "Major", "Mini" |
-| Project preview links & credentials | ✅ | Some projects include previewUrl and credentials (displayed on card) |
-| Sticky, animated navigation | ✅ | Navbar component with active-route highlighting |
-| Firebase dependency present | ✅ | Firebase is listed in package.json and a firebase.js file exists (see Security notes) |
+| Feature | Implemented | Notes |
+|---|:---:|---|
+| Client-side routing (Home, Skills, Projects, Profile, Contact, About) | ✅ | Routes defined in `src/App.js` |
+| Responsive design | ✅ | Tailwind utility classes throughout (`src/js/*`) |
+| Page transitions / animations | ✅ | Uses `framer-motion` (`AnimatePresence` and `motion`) |
+| Resume download | ✅ (file exists) | `public/Ashish_Resume.pdf` — verify contents |
+| Contact page | ✅ | `src/js/Contact.js` present — verify backend behaviour |
+| Firebase present | ✅ (dependency + `src/firebase.js`) | Verify whether secrets are checked in; use env vars |
+| Unit / integration tests | ⚠️ | CRA test scaffold present (`src/setupTests.js`) — no dedicated tests found |
 
 ---
 
-## Tech Stack
-- React (Create React App)
-- React Router
+## Tech stack (detected from package.json)
+
+- React 19
+- Create React App (react-scripts)
+- Tailwind CSS 3
 - Framer Motion
-- Tailwind CSS
-- Firebase (library present)
-- React Icons / Lucide
-- html2pdf.js listed as a dependency (available in repo)
+- Firebase (client SDK)
+- lucide-react, react-icons
+- html2pdf.js
 - Build toolchain: PostCSS / Autoprefixer
 
 Badges
-- React • Tailwind • Framer Motion • Firebase • JavaScript
+- React: ![React](https://img.shields.io/badge/React-19.x-61DAFB)
+- Tailwind: ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.x-38B2AC)
+- Firebase: ![Firebase](https://img.shields.io/badge/Firebase-%20-present-FFCA28)
+
+(Replace badges with official shield links if you prefer.)
 
 ---
 
-## Architecture
+## Architecture overview
 
-High-level overview
-- UI: Function components (pages under src/js) using React + Tailwind for layout and styling.
-- Routing: BrowserRouter + Routes configured in src/App.js.
-- Animations: Framer Motion used for entrance, hover and staggered animations.
-- Data: Projects and skills are currently defined as static arrays within their respective page modules (for example, src/js/Projects.js).
-- Components: Reusable presentational components live under src/components (ProjectCard is used by Projects page).
+This is a client-side rendered React application (Create React App) with a small, focused component hierarchy:
 
-Data flow
-- Static page data (skills, projects) is imported and rendered by page components.
-- Navigation is client-side; page transitions are animated via Framer Motion.
-- Firebase is included as a dependency and a firebase.js file is present — this indicates a place to wire up realtime or storage features if desired (no external secrets are committed here).
+- Entry point: `src/index.js` -> `src/App.js`
+- Routes and pages: `src/App.js` uses `react-router-dom` Routes
+  - Page components: `src/js/{Home,About,Skills,Projects,Profile,Contact}.js`
+- Styling: Tailwind CSS configured in `tailwind.config.js` + `src/index.css`
+- Animations: `framer-motion` used for page transitions (`AnimatePresence`, `motion`)
+- Assets: `public/` contains static assets and `index.html`
+- Backend/config: `src/firebase.js` present (inspect to validate environment variables / secrets)
+
+How it fits together:
+- The app runs in the browser as an SPA. Navigation is handled by `react-router-dom`, `App.js` wires routes to page components. Each page implements the UI and uses Tailwind utilities. Framer Motion provides enter/exit transitions for polished navigation. Firebase appears present for optional backend tasks (contact or hosting) — confirm configuration.
 
 ---
 
-## Folder Structure
+## Folder structure (top-level, trimmed)
 
 ```
-PORTFOLIO/
-├─ .gitignore
-├─ README.md
+.
+├─ public/                # static assets, index.html, resume PDF
+├─ src/
+│  ├─ js/                 # page components: Home, Projects, Skills, Contact, About, Navbar, Profile
+│  ├─ index.js            # React entry
+│  ├─ index.css           # global styles (Tailwind imports)
+│  ├─ App.js              # Router + top-level layout
+│  ├─ firebase.js         # Firebase config (inspect / secure)
+│  └─ reportWebVitals.js, setupTests.js
 ├─ package.json
-├─ package-lock.json
-├─ postcss.config.js
 ├─ tailwind.config.js
-├─ public/
-└─ src/
-   ├─ index.js
-   ├─ index.css
-   ├─ logo.svg
-   ├─ reportWebVitals.js
-   ├─ setupTests.js
-   ├─ firebase.js
-   ├─ js/
-   │  ├─ Navbar.js
-   │  ├─ Home.js
-   │  ├─ About.js
-   │  ├─ Skills.js
-   │  ├─ Projects.js
-   │  ├─ Profile.js
-   │  └─ Contact.js
-   └─ components/
-      └─ ProjectCard.js
+├─ postcss.config.js
+└─ README.md
 ```
-
-Notes:
-- The tree reflects files referenced by imports in the code (pages under src/js and a ProjectCard in src/components).
-- Projects and skills are provided as static arrays inside the relevant page modules.
 
 ---
 
 ## Installation
 
-Clone and run locally:
+Prerequisites
+- Node.js (recommended LTS). Project does not declare `engines` in package.json — choose a current LTS release (e.g., 18.x or 20.x).
+- npm (bundled with Node) or Yarn.
+
+Install and run locally:
 
 ```bash
 # clone
 git clone https://github.com/devxashish/PORTFOLIO.git
 cd PORTFOLIO
 
-# install dependencies
+# install
 npm install
 
 # start dev server
 npm start
-
-# build for production
-npm run build
 ```
 
-These scripts are defined in package.json and rely on Create React App tooling.
+The app will run at http://localhost:3000 by default.
+
+Production build:
+
+```bash
+npm run build
+# serve the build or deploy to your host of choice
+```
+
+Environment & secrets
+- If using Firebase, ensure any keys/credentials are not committed to repository. Use environment variables or a `.env.local` file and update `src/firebase.js` to read from process.env. (TODO: confirm whether `src/firebase.js` includes secrets; remove if present.)
 
 ---
 
 ## Usage
 
-- Development: run npm start and open http://localhost:3000
-- Navigation:
-  - / — Home
-  - /about — About
-  - /skills — Skills
-  - /projects — Projects (filterable)
-  - /profile — Profile / Resume
-  - /contact — Contact
-- Updating content:
-  - Edit skill entries in src/js/Skills.js
-  - Edit projects in src/js/Projects.js (title, description, tech array, previewUrl, credentials, type)
-
-Example: quickly add a new project (src/js/Projects.js)
-```javascript
-projects.push({
-  title: "New Project",
-  description: "Short blurb about the project",
-  tech: ["React", "Tailwind"],
-  previewUrl: "#",
-  type: "mini"
-});
-```
+- Navigate the SPA using the navbar. Pages present include Home, Skills, Projects, Profile (Resume) and Contact.
+- The resume file is available at `/Ashish_Resume.pdf` (public folder).
+- Projects and detailed entries are presented from `src/js/Projects.js` — update this file to add or change projects.
 
 ---
 
-## Screenshots
-(Placeholders — add real screenshots by replacing these sections.)
+## Project screenshots
+No screenshot images were found in the repository. Add screenshots or a `docs/screenshots/` folder with representative images for Home, Projects and Contact pages.
 
-<details>
-<summary>Home — Placeholder</summary>
-
-![Home Placeholder](./.github/screenshots/home-placeholder.png)
-
-</details>
-
-<details>
-<summary>Projects — Placeholder</summary>
-
-![Projects Placeholder](./.github/screenshots/projects-placeholder.png)
-
-</details>
+TODO: add screenshots (desktop and mobile) and link them here.
 
 ---
 
-## Live Demo
-Live demo will be available after the upcoming redesign.
+## Live demo
+No live demo URL was detected in the repository. If deployed, add the link here.
+
+TODO: add Live Demo URL (Netlify / Vercel / GitHub Pages).
 
 ---
 
-## Roadmap
+## Featured projects
+The Projects page component exists (`src/js/Projects.js`) and is the intended place to list featured work. At present, specific featured-project metadata is stored directly in the Projects component (open that file to edit). If you manage multiple projects, consider moving data to a JSON file or CMS.
 
-- Current
-  - Polished SPA with animated transitions
-  - Responsive layout and component-driven pages
-  - Static projects and skills listing
-
-- Next Version
-  - Replace static projects with a content-backed source (Firebase or headless CMS)
-  - Add contact form backend (serverless functions / Firebase)
-  - Improve accessibility (a11y audits & fixes)
-
-- Future Vision
-  - Content-admin interface for non-developers to update portfolio
-  - Optional theme support (light / dark)
-  - Export resume/profile to PDF via an integrated flow (html2pdf.js is available in dependencies)
+TODO: extract project metadata and add clear README entries for each featured project.
 
 ---
 
-## Performance
+## Roadmap & future vision
 
-What’s present
-- TailwindCSS for compact, utility-first styling (reduces unused CSS when purged in production).
-- Create React App production build produces optimized bundles (minified, hashed filenames).
-- Framer Motion uses performant transforms and hardware-accelerated animation patterns.
-
-Suggested improvements
-- Adopt code-splitting for large pages or heavy libraries.
-- Enable Tailwind purge/content scanning for production to reduce CSS size.
-- Audit bundle with source-map-explorer / webpack-bundle-analyzer to locate large dependencies.
+Planned / recommended improvements (based on repository state):
+- Improve accessibility (a11y) audit, fix semantic roles and keyboard interactions.
+- Extract project metadata to a structured source (JSON or headless CMS).
+- Add unit & e2e tests for critical UI flows (Contact form, Projects rendering).
+- Consider migration off react-scripts to a faster bundler (Vite) for smaller builds.
+- Provide CI/CD (GitHub Actions) with automatic preview deployments.
 
 ---
 
-## Security
+## Performance notes
 
-- Firebase is included as a dependency and there is a firebase.js file in the repo. Do NOT commit credentials or API keys.
-- Recommended: Use environment variables (.env.local) for any Firebase config or secret values — add .env to .gitignore.
-- Never put secrets, service account JSON, or API keys directly in the repository.
-
-Example .env (do not commit):
-```
-REACT_APP_FIREBASE_API_KEY=your_api_key_here
-REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain_here
-```
+- Tailwind keeps CSS small when properly purged in production; ensure purge/content paths are correct (tailwind.config.js includes `./src/**/*.{js,jsx,ts,tsx}`).
+- react-scripts build produces hashed static files; run `npm run build` and inspect bundle sizes.
+- If bundle size is high, consider code splitting and lazy-loading components (React.lazy + Suspense).
 
 ---
 
-## Developer
+## Security notes
 
-Owner: Ashish  
-GitHub: https://github.com/devxashish
-
-This project represents the evolution of my engineering journey — a concise, modern portfolio that demonstrates practical front-end craftsmanship.
+- Inspect `src/firebase.js` for any API keys pushed to the repository. API keys for Firebase (client SDK) are not secret by themselves, but any server credentials or service account files must never be committed. If secrets are found: rotate and move to environment variables.
+- Use environment variables (`.env.local`) for deployment secrets and add `.env*` to `.gitignore`.
+- Sanitize any form inputs (Contact form) before sending to backend services.
 
 ---
 
 ## Contributing
 
-Thank you for considering a contribution. To keep PRs focused:
+Contributions are welcome. There is currently no `CONTRIBUTING.md` or ISSUE_TEMPLATE in the repo.
 
-- Fork the repo and create a descriptive branch: feature/..., fix/..., chore/...
-- Keep changes small and focused; one feature or fix per PR.
-- Update or add tests where applicable (CRA testing setup exists).
-- Ensure linting and formatting remain consistent (Tailwind utility patterns).
-- For content updates (skills/projects), update the arrays in src/js/Skills.js and src/js/Projects.js respectively.
-- Open an issue with a short description before larger changes so we can discuss scope.
+Suggested minimal contributing steps:
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feat/your-feature`.
+3. Make changes, add tests where applicable.
+4. Open a PR with a clear description and screenshots.
 
-A suggested PR template:
-- What changed
-- Why it improves the project
-- Any breaking changes
+TODO: add CONTRIBUTING.md and ISSUE_TEMPLATE to guide contributors.
+
+---
+
+## Developer information
+
+- Author / owner: Ashish (GitHub: `devxashish`)
+- Key files:
+  - `src/App.js` — routing and app shell
+  - `src/js/*` — pages and components
+  - `src/firebase.js` — firebase initialisation (review & secure)
+  - `public/Ashish_Resume.pdf` — resume (verify)
+- Build: `react-scripts build` (CRA)
 
 ---
 
 ## License
 
-No license file is present in this repository at the moment. A license will be added later.
+No license file was found in the repository root.
+
+TODO: add a LICENSE (e.g., MIT) if you want to allow reuse. Until a license is added, repository defaults to “all rights reserved.”
 
 ---
 
-Built with passion for creating modern software that solves real-world problems. 🚀
-```
+## Footer
+
+If you’re a recruiter, client, or contributor: this code demonstrates React best-practices for small SPAs, responsive layouts with Tailwind, and motion-driven polish using Framer Motion. For changes, open a PR and reference the relevant file under `src/js/`.  
+
+Thank you — Ashish (maintainer) · GitHub: @devxashish
